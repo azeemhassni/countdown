@@ -77,11 +77,11 @@ struct ContentView: View {
                 }
 
                 List {
-                    ForEach(events) { event in
+                    ForEach($events) { $event in
                         HStack {
                             Text(event.emoji)
                             VStack(alignment: .leading) {
-                                Text(event.label)
+                                Text(event.isPrivate ? "•••••" : event.label)
                                 Text(event.date.formatted(date: .abbreviated, time: .shortened))
                                     .font(.caption)
                                     .foregroundColor(.gray)
@@ -90,6 +90,11 @@ struct ContentView: View {
                             if event.id.uuidString == pinnedEventID {
                                 Text("📌")
                             }
+                            Text(event.isPrivate ? "🙈" : "🐵")
+                                .onTapGesture {
+                                    event.isPrivate.toggle()
+                                    saveEvents()
+                                }
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {

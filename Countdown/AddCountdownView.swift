@@ -23,7 +23,7 @@ struct AddCountdownView: View {
                 if let editing = editingEvent,
                    let index = events.firstIndex(where: { $0.id == editing.id }) {
                     // Update existing
-                    events[index] = CountdownEvent(id: editing.id, emoji: emoji, label: label, date: date)
+                    events[index] = CountdownEvent(id: editing.id, emoji: emoji, label: label, date: date, isPrivate: false)
                 } else {
                     // Add new
                     let newEvent = CountdownEvent(id: UUID(), emoji: emoji, label: label, date: date)
